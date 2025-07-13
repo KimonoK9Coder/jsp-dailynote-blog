@@ -1,4 +1,4 @@
-name: update jsp daily-note blog.
+name: Update jsp daily-note blog.
 on:
   repository_dispatch:
     types: [obsidian-updated]
@@ -7,13 +7,13 @@ jobs:
   update-blog-contents:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout repository
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
           submodules: recursive
           token: ${{ secrets.JSP_DAILYNOTE_BLOG_TOKEN }}
 
-      - name: update blog contents.
+      - name: Update blog contents.
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@user.noreply.github.com'
@@ -28,3 +28,8 @@ jobs:
 
           git commit -m "👊 Update jsp daily-note blog content submodule"
           git push
+      - name: Install deps
+        run: npm install
+
+      - name: Build
+        run: npx quartz build
