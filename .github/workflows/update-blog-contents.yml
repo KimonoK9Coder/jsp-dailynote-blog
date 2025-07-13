@@ -1,0 +1,30 @@
+name: update jsp daily-note blog.
+on:
+  repository_dispatch:
+    types: [obsidian-updated]
+
+jobs:
+  update-blog-contents:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          token: ${{ secrets.JSP_DAILYNOTE_BLOG_TOKEN }}
+
+      - name: update blog contents.
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@user.noreply.github.com'
+
+          git submodule update --remote --recursive
+          git add .
+
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "No changes detected in submodule."
+            exit 0
+          fi
+
+          git commit -m "👊 Update jsp daily-note blog content submodule"
+          git push
