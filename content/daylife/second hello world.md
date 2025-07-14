@@ -5,14 +5,15 @@ tags:
 draft: "false"
 ---
 
-# Make enable Mermaid using Icons
-## using iconify packages.
+# Make quartz enable Mermaid use Icons
+## install iconify packages. and mermaid.
 
 `npm i @iconify-json/logos mermaid`
 
 edit 'quartz/components/scripts/mermaid.inline.ts'
 
 ```typescript
+
 /// Top of Contents
 import { icons } from "@iconify-json/logos"
 import mermaid from "mermaid"
@@ -67,6 +68,14 @@ architecture-beta
     disk2:T -- B:db
 ```
 
+
+```mermaid
+architecture-beta
+    group api(logos:google)[API]
+    service db(logos:mysql)[Database] in api
+    service server(logos:nodejs)[Server] in api
+    db:L -- R:server
+```
 ```plantuml
 @startuml Hello World
 ' Uncomment the line below for "dark mode" styling
@@ -87,3 +96,5 @@ desktopAlias --> storageAlias
 @enduml
 
 ```
+
+Todo: make Obsidian can see @iconify-json/logos package.
