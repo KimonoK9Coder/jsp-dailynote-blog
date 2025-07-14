@@ -29,13 +29,13 @@ jobs:
       #     git commit -m "👊 Update jsp daily-note blog content submodule"
       #     git push
 
-      - name: Clond /blog/publish from jsp-dailynote repo
+      - name: Clond /blog/publish from note repo
         env:
           TOKEN: ${{ secrets.JSP_DAILYNOTE_BLOG_TOKEN }}
           URL: ${{ vars.JSP_DAILYNOTE_URL }}
         run: |
-          git clone --depth=1 --filter=blob:none --sparse https://x-accecss-token:${TOKEN}@${URL}.git jsp-dailymemo
-          cd jsp-dailymemo
+          git clone --depth=1 --filter=blob:none --sparse https://x-accecss-token:${TOKEN}@${URL}.git publish-note
+          cd publish-note
           git sparse-checkout init --cone
           git sparse-checkout set blog/publish/
           rsync -av blog/publish/ ../content/
