@@ -14,34 +14,22 @@ edit 'quartz/components/scripts/mermaid.inline.ts'
 
 ```typescript
 /// Top of Contents
-
 import { icons } from "@iconify-json/logos"
-
-  
+import mermaid from "mermaid"
 
 document.addEventListener("nav", async () => {
+  const { default: mermaid } = await import(
+    // @ts-ignore
+    "https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs"
+  )
 
-const { default: mermaid } = await import(
-
-// @ts-ignore
-"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs"
-
-)
-
-
-mermaid.registerIconPacks([
-
-{
-
-name: icons.prefix,
-icons,
-
-},
-
-])
-
+  mermaid.registerIconPacks([
+    {
+      name: icons.prefix,
+      icons,
+    },
+  ])
 })
-
 
 /// rest of contents
 
