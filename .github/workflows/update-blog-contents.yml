@@ -9,25 +9,33 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          submodules: recursive
-          token: ${{ secrets.JSP_DAILYNOTE_BLOG_TOKEN }}
+        # with:
+        #   submodules: recursive
+        #   token: ${{ secrets.JSP_DAILYNOTE_BLOG_TOKEN }}
 
-      - name: Update blog contents.
+      # - name: Update blog contents.
+      #   run: |
+      #     git config --global user.name 'github-actions[bot]'
+      #     git config --global user.email 'github-actions[bot]@user.noreply.github.com'
+
+      #     git submodule update --remote --recursive
+      #     git add .
+
+      #     if [ -z "$(git status --porcelain)" ]; then
+      #       echo "No changes detected in submodule."
+      #       exit 0
+      #     fi
+
+      #     git commit -m "👊 Update jsp daily-note blog content submodule"
+      #     git push
+
+      - name: Clond /blog/publish from jsp-dailynote repo
         run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@user.noreply.github.com'
-
-          git submodule update --remote --recursive
-          git add .
-
-          if [ -z "$(git status --porcelain)" ]; then
-            echo "No changes detected in submodule."
-            exit 0
-          fi
-
-          git commit -m "👊 Update jsp daily-note blog content submodule"
-          git push
+          git clone --depth=1 --filter=blob:none --sparse "${{ vars.JSP_DAILYNOTE_URL }}.git" jsp-dailymemo
+          cd jsp-dailymemo
+          git sparse-checkout init --cone
+          git sparse-checkout set blog/publish/
+          rsync -av blog/publish/ ../content/
 
       - name: Set up Node.js to 22
         uses: actions/setup-node@v4
