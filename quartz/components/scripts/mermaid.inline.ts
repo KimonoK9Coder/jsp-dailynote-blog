@@ -1,5 +1,22 @@
 import { registerEscapeHandler, removeAllChildren } from "./util"
 
+import { icons } from "@iconify-json/logos"
+
+document.addEventListener("nav", async () => {
+  const { default: mermaid } = await import(
+    // @ts-ignore
+    "https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs"
+  )
+
+  // ─── 아이콘팩 등록 ───────────────────────────────────────────────
+  mermaid.registerIconPacks([
+    {
+      name: icons.prefix, // ← 'names' 가 아니라 'name'
+      icons,
+    },
+  ])
+})
+
 interface Position {
   x: number
   y: number
