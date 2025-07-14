@@ -1,6 +1,7 @@
 import { registerEscapeHandler, removeAllChildren } from "./util"
 
 import { icons } from "@iconify-json/logos"
+import mermaid from "mermaid"
 
 document.addEventListener("nav", async () => {
   const { default: mermaid } = await import(
