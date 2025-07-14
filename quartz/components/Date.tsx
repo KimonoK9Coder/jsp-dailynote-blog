@@ -1,6 +1,6 @@
 import { GlobalConfiguration } from "../cfg"
-import { ValidLocale } from "../i18n"
 import { QuartzPluginData } from "../plugins/vfile"
+import { ValidLocale } from "../i18n"
 
 interface Props {
   date: Date
@@ -23,6 +23,8 @@ export function formatDate(d: Date, locale: ValidLocale = "en-US"): string {
     year: "numeric",
     month: "short",
     day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
   })
 }
 
