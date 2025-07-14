@@ -30,8 +30,11 @@ jobs:
       #     git push
 
       - name: Clond /blog/publish from jsp-dailynote repo
+        env:
+          TOKEN: ${{ secrets.JSP_DAILYNOTE_BLOG_TOKEN }}
+          URL: ${{ vars.JSP_DAILYNOTE_URL }}
         run: |
-          git clone --depth=1 --filter=blob:none --sparse "${{ vars.JSP_DAILYNOTE_URL }}.git" jsp-dailymemo
+          git clone --depth=1 --filter=blob:none --sparse https://x-accecss-token:${TOKEN}@${URL}.git jsp-dailymemo
           cd jsp-dailymemo
           git sparse-checkout init --cone
           git sparse-checkout set blog/publish/
