@@ -8,7 +8,7 @@ draft: "false"
 # Make enable Mermaid using Icons
 ## using iconify packages.
 
-`npm i @iconify-json/logos`
+`npm i @iconify-json/logos mermaid`
 
 edit 'quartz/components/scripts/mermaid.inline.ts'
 
