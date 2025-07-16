@@ -1,0 +1,81 @@
+name: Update jsp daily-note blog.
+on:
+  repository_dispatch:
+    types: [obsidian-updated]
+
+jobs:
+  update-blog-contents:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          token: ${{ secrets.JSP_DAILYNOTE_BLOG_TOKEN }}
+
+      - name: Update blog contents.
+        env:
+          SUBMODULE_URL: https://github.com/KimonoK9Coder/jsp-dailynote
+          SUBMODULE_PATH: content
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@user.noreply.github.com'
+
+          if [ -d "$SUBMODULE_PATH/.git" ] || grep -q "$SUBMODULE_PATH" .gitmodules 2>/dev/null; then
+            echo "✅ Submodule exists. Updating..."
+            git submodule update --init --recursive "$SUBMODULE_PATH"
+            git submodule update --remote --recursive "$SUBMODULE_PATH"
+          else
+            echo "➕ Submodule missing. Adding..."
+            git submodule add "$SUBMODULE_URL" "$SUBMODULE_PATH"
+            git submodule update --init --recursive
+          fi
+
+          git add .gitmodules "$SUBMODULE_PATH"
+
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "No changes to commit."
+          else
+            git commit -m "🔁 Add or update submodule: $SUBMODULE_PATH"
+            git push origin HEAD
+          fi
+
+      #     git commit -m "👊 Update jsp daily-note blog content submodule"
+      #     git push
+
+      # - name: Clond /blog/publish from note repo
+      #   env:
+      #     TOKEN: ${{ secrets.JSP_DAILYNOTE_BLOG_TOKEN }}
+      #     URL: ${{ vars.JSP_DAILYNOTE_URL }}
+      #   run: |
+      #     git config user.name "github-actions[bot]"
+      #     git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      #     git clone --depth=1 --filter=blob:none --sparse https://x-access-token:${TOKEN}@${URL}.git publish-note
+
+      #     cd publish-note
+      #     git sparse-checkout init --cone
+      #     git sparse-checkout set blog/publish
+
+      #     rsync -av blog/publish/ ../content/
+
+      - name: Set up Node.js to 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install deps
+        run: npm i
+
+      - name: Build and push Contents.
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          npx quartz build
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add content/
+          git commit -m "📲 Update blog contents from note repo" || echo "No changes to commit"
+          git push origin HEAD
