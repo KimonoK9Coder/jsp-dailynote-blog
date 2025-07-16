@@ -13,11 +13,14 @@ jobs:
           submodules: recursive
           ssh-key: ${{ secrets.JSP_DAILYNOTE_SSH_KEY }}
 
-      - name: Update blog contents.
+      - name: Setup Git Identity
         run: |
           git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@user.noreply.github.com'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
 
+      - name: Update blog contents
+        run: |
           echo "✅ Submodule Updating..."
           git submodule update --remote --recursive
 
