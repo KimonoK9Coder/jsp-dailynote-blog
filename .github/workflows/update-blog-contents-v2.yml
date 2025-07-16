@@ -19,8 +19,7 @@ jobs:
           git config --global user.email 'github-actions[bot]@user.noreply.github.com'
 
           echo "✅ Submodule Updating..."
-            git submodule update --remote --recursive
-          fi
+          git submodule update --remote --recursive
 
           git add .
 
