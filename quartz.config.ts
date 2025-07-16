@@ -1,5 +1,6 @@
-import { QuartzConfig } from "./quartz/cfg"
 import * as Plugin from "./quartz/plugins"
+
+import { QuartzConfig } from "./quartz/cfg"
 
 /**
  * Quartz 4 Configuration
@@ -8,7 +9,7 @@ import * as Plugin from "./quartz/plugins"
  */
 const config: QuartzConfig = {
   configuration: {
-    pageTitle: "Quartz 4",
+    pageTitle: "Sample",
     pageTitleSuffix: "",
     enableSPA: true,
     enablePopovers: true,
@@ -17,7 +18,7 @@ const config: QuartzConfig = {
     },
     locale: "en-US",
     baseUrl: "quartz.jzhao.xyz",
-    ignorePatterns: ["private", "templates", ".obsidian"],
+    ignorePatterns: ["private", "templates", ".obsidian", "static", "memo", "diagram"],
     defaultDateType: "modified",
     theme: {
       fontOrigin: "googleFonts",
