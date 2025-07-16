@@ -3,6 +3,9 @@ on:
   repository_dispatch:
     types: [obsidian-updated]
 
+permissions:
+  contents: write
+
 jobs:
   update-blog-contents:
     runs-on: ubuntu-latest
