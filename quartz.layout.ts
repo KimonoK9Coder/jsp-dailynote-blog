@@ -6,11 +6,23 @@ import { PageLayout, SharedLayout } from "./quartz/cfg"
 export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
   header: [],
-  afterBody: [],
+  afterBody: [
+    Component.Comments({
+      provider: "giscus",
+      options: {
+        repo: "KimonoK9Coder/jsp-dailynote-blog",
+        repoId: "R_kgDOPLlF2A",
+        category: "Announcements",
+        categoryId: "DIC_kwDOPLlF2M4CtE2W",
+        lang: "ko",
+        inputPosition: "top",
+      },
+    }),
+  ],
   footer: Component.Footer({
     links: {
-      GitHub: "https://github.com/jackyzha0/quartz",
-      "Discord Community": "https://discord.gg/cRFFHYye7t",
+      GitHub: "https://github.com/KimonoK9Coder",
+      LinkedIn: "https://www.linkedin.com/in/jongseok-park-61987222a/",
     },
   }),
 }
