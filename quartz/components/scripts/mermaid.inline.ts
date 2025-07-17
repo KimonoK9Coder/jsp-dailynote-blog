@@ -4,9 +4,8 @@ import { icons } from "@iconify-json/logos"
 
 document.addEventListener("nav", async () => {
   const { default: mermaid } = await import(
-    "mermaid"
-    // // @ts-ignore
-    // "https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs"
+    // @ts-ignore
+    "https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs"
   )
 
   // ─── 아이콘팩 등록 ───────────────────────────────────────────────
