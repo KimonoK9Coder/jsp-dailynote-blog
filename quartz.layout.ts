@@ -12,9 +12,9 @@ export const sharedPageComponents: SharedLayout = {
       options: {
         repo: "KimonoK9Coder/jsp-dailynote-blog",
         repoId: "R_kgDOPLlF2A",
-        category: "Announcements",
-        categoryId: "DIC_kwDOPLlF2M4CtE2W",
-        lang: "us",
+        category: "General",
+        categoryId: "DIC_kwDOPLlF2M4CtE2X",
+        lang: "en",
         inputPosition: "top",
       },
     }),
@@ -54,7 +54,7 @@ export const defaultContentPageLayout: PageLayout = {
     Component.Explorer(),
   ],
   right: [
-    // Component.Graph(),
+    Component.Graph(),
     Component.DesktopOnly(Component.TableOfContents()),
     Component.Backlinks(),
   ],
