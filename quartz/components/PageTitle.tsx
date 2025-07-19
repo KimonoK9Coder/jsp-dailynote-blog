@@ -20,23 +20,21 @@ PageTitle.css = `
   margin: 0;
   font-family: var(--titleFont);
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
-  line-height: 1.2;
+  gap: 1rem;
+  text-align: center;
 }
 
 .title-icon {
-  width: 1.5rem;
-  height: 1.5rem;
-  flex-shrink: 0;
+  width: 4rem;
+  height: 4rem;
   object-fit: contain;
 }
 
 .page-title a {
   text-decoration: none;
   color: inherit;
-  flex: 1;
-  min-width: 0; /* 텍스트 오버플로우 방지 */
 }
 `
 
