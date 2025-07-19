@@ -14,7 +14,7 @@ export const sharedPageComponents: SharedLayout = {
         repoId: "R_kgDOPLlF2A",
         category: "Announcements",
         categoryId: "DIC_kwDOPLlF2M4CtE2W",
-        lang: "ko",
+        lang: "us",
         inputPosition: "top",
       },
     }),
