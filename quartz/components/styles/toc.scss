@@ -6,6 +6,7 @@
   overflow-y: hidden;
   min-height: 1.4rem;
   flex: 0 0.5 auto;
+
   &:has(button.toc-header.collapsed) {
     flex: 0 1 1.4rem;
   }
@@ -45,17 +46,37 @@ ul.toc-content.overflow {
   padding: 0;
   max-height: calc(100% - 2rem);
   overscroll-behavior: contain;
-  list-style: none;
 
-  & > li > a {
-    color: var(--dark);
-    opacity: 0.35;
-    transition:
-      0.5s ease opacity,
-      0.3s ease color;
-    &.in-view {
-      opacity: 0.75;
+  & > li {
+    margin-bottom: 0.5rem; /* 기본 간격 조정 */
+    line-height: 1.6; /* 줄 높이 증가 */
+
+    & > a {
+      color: var(--dark);
+      opacity: 0.35;
+      padding: 0.25rem 0; /* 상하 패딩 추가 */
+      display: block;
+      transition:
+        0.5s ease opacity,
+        0.3s ease color;
+
+      &.in-view {
+        opacity: 0.75;
+      }
     }
+  }
+
+  /* 깊이별로 다른 간격 적용 */
+  & .depth-1 {
+    margin-bottom: 0.6rem;
+  }
+
+  & .depth-2 {
+    margin-bottom: 0.4rem;
+  }
+
+  & .depth-3 {
+    margin-bottom: 0.3rem;
   }
 
   @for $i from 0 through 6 {

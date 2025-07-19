@@ -17,8 +17,32 @@ details.toc {
     list-style: none;
     margin: 0.5rem 1.25rem;
     padding: 0;
+
+    & li {
+      margin-bottom: 0.5rem; /* 기본 간격 조정 */
+      line-height: 1.6; /* 줄 높이 증가 */
+
+      & a {
+        padding: 0.25rem 0; /* 상하 패딩 추가 */
+        display: block;
+      }
+
+      /* 깊이별로 다른 간격 적용 */
+      &.depth-1 {
+        margin-bottom: 0.6rem;
+      }
+
+      &.depth-2 {
+        margin-bottom: 0.4rem;
+      }
+
+      &.depth-3 {
+        margin-bottom: 0.3rem;
+      }
+    }
   }
 
+  /* 깊이별 패딩 적용 */
   @for $i from 1 through 6 {
     & .depth-#{$i} {
       padding-left: calc(1rem * #{$i});
